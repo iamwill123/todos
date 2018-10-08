@@ -4,7 +4,7 @@ const loadState = () => {
     if (serializeState === null) {
       return undefined;
     }
-    return JSON.parse(serializeState); // JSON parse is expensive to run.
+    return JSON.parse(serializeState); // JSON parse to turn it into the state object
   } catch (error) {
     return undefined;
   }
@@ -12,7 +12,7 @@ const loadState = () => {
 
 const saveState = (state) => {
   try {
-    const serializeState = JSON.stringify(state);
+    const serializeState = JSON.stringify(state); // the stringify operation is expensive
     localStorage.setItem('state', serializeState);
   } catch (error) {
     console.log(`saveState error,`, error);

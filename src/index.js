@@ -18,13 +18,17 @@ const store = createStore(
   persistedState // this will end up as the initial state in the root reducer instead of undefined
 );
 
-store.subscribe(
-  () => {
-    saveState(
-      store.getState()
-    );
-  }
-);
+// The store subscribe method will be invoked any time the store state changes
+// Below we are preserving the data and the UI state.
+store.subscribe(() => saveState(store.getState()) );
+
+// We want to preserve the data and not the UI state, so the filterlist will not be persisted.
+// Here we can calling saveState everytime the store state changes, this is expensive.
+store.subscribe(() => {
+  saveState({
+    todos: store.getState().todos
+  });
+});
 
 console.log(`Initial Store state: `, store.getState());
 

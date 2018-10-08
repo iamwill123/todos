@@ -1,8 +1,8 @@
-let nextTodoId = 0;
+import { v4 } from 'node-uuid'; // we want to generate a unique id with v4
 
 export const addTodo = (text) => ({
   type: 'ADD_TODO',
-  id: (nextTodoId++).toString(),
+  id: v4(),
   text,
 });
 
